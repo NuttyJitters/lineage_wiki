@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on gts210vewifi
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: gts210vewifi_install.html
+title: Install LineageOS on gts210vewifi
+folder: install
 permalink: /devices/gts210vewifi/install
 device: gts210vewifi
 ---

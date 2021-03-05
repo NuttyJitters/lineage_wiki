@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on chagallwifi
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: chagallwifi_install.html
+title: Install LineageOS on chagallwifi
+folder: install
 permalink: /devices/chagallwifi/install
 device: chagallwifi
 ---

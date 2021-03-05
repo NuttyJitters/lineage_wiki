@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
 title: Build for kltedv
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: kltedv_build.html
+folder: build
 permalink: /devices/kltedv/build
 device: kltedv
 ---

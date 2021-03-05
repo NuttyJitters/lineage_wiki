@@ -1,36 +1,30 @@
 architecture: arm64
-battery: Non-removable Li-Po 4050 mAh
-bluetooth: v4.1 with A2DP, LE
+battery: {removable: False, capacity: 4050, tech: 'Li-Po'}
+bluetooth: {spec: '4.1', profiles: [A2DP]}
 cameras:
-- {flash: dual-tone, info: 16MP}
-- {flash: '', info: 5MP}
-carrier:
-channels: [weekly]
+- {flash: 'LED (dual-tone)', info: '16 MP'}
+- {flash: '', info: '5 MP'}
 codename: kenzo
-cpu: Cortex A53 & A72
+cpu: Cortex-A53 & Cortex-A72
 cpu_cores: '6'
 cpu_freq: 4 x 1.4 GHz & 2 x 1.8 GHz
 current_branch: 14.1
 depth: 8.7 mm (0.34 in)
-download_boot: Hold **Volume Down** and **Power** buttons simultaneously.
-  Continue to hold both buttons until the word "FASTBOOT" appears on the screen, then release.
+download_boot: With the device powered off, hold <kbd>Volume Down</kbd> + <kbd>Power</kbd>.
+  Keep holding both buttons until the word "FASTBOOT" appears on the screen, then release.
 gpu: Adreno 510
-has_recovery_partition: true
 height: 150 mm (5.91 in)
 image: kenzo.png
 install_method: fastboot_xiaomi
 kernel: android_kernel_xiaomi_msm8956
-maintainers: [TheStrix]
+maintainers: []
 name: Redmi Note 3
-network:
-- {tech: 2G, bands: '850 900 1800 1900 MHz GSM' }
-- {tech: 3G, bands: '850 900 1700(AWS) 1900 2100 MHz HSDPA, 850 900 1900 2100 MHz HSDPA (India)' }
-- {tech: 4G, bands: '1(2100) 2(1900) 3(1800) 4(1700/2100) 5(850) 7(2600) 8(900) 38(2600) 39(1900) 40(2300) 41(2500), 1(2100) 3(1800) 5(850) 7(2600) 8(900) 38(2600) 39(1900) 40(2300) 41(2500) (India)' }
-peripherals: [Fingerprint, Accelerometer, Gyroscope, Proximity sensor, Digital compass, GPS, IR, FM Radio]
+network: [2G GSM, 3G UMTS, 4G LTE]
+peripherals: [Fingerprint reader, Accelerometer, Gyroscope, Proximity sensor, Compass, GPS, Infrared sensor, FM radio]
 ram: 2/3 GB
-recovery_boot: Hold **Volume Up** and **Power** buttons simultaneously.
-  Continue to hold both buttons until the "MI" logo appears on the screen, then release.
-release: 2016 February
+recovery_boot: With the device powered off, hold <kbd>Volume Up</kbd> + <kbd>Power</kbd>.
+  Keep holding both buttons until the "MI" logo appears on the screen, then release.
+release: 2016-02
 screen: 139.7 mm (5.5 in)
 screen_ppi: '403'
 screen_res: 1080x1920
@@ -40,6 +34,7 @@ soc: Qualcomm MSM8956 Snapdragon 650
 storage: 16/32 GB
 tree: android_device_xiaomi_kenzo
 type: phone
+uses_twrp: true
 vendor: Xiaomi
 vendor_short: xiaomi
 versions: [14.1]

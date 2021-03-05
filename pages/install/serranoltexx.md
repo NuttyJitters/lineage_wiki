@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on serranoltexx
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: serranoltexx_install.html
+title: Install LineageOS on serranoltexx
+folder: install
 permalink: /devices/serranoltexx/install
 device: serranoltexx
 ---

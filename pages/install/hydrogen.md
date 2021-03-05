@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on hydrogen
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: hydrogen_install.html
+title: Install LineageOS on hydrogen
+folder: install
 permalink: /devices/hydrogen/install
 device: hydrogen
 ---

@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on cancro
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: cancro_install.html
+title: Install LineageOS on cancro
+folder: install
 permalink: /devices/cancro/install
 device: cancro
 ---

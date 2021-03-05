@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on gts28vewifi
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: gts28vewifi_install.html
+title: Install LineageOS on gts28vewifi
+folder: install
 permalink: /devices/gts28vewifi/install
 device: gts28vewifi
 ---

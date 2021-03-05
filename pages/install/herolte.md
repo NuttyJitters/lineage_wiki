@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on herolte
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: herolte_install.html
+title: Install LineageOS on herolte
+folder: install
 permalink: /devices/herolte/install
 device: herolte
 ---

@@ -2,9 +2,10 @@
 title: Build guides
 sidebar: home_sidebar
 permalink: build_guides.html
+toc: false
 ---
 
-{% assign sorted_pages = (site.pages | sort: 'title') %}
+{% assign sorted_pages = site.pages | sort: 'title' %}
 
 {% for page in sorted_pages %}
 {% if page.title and page.url and page.url contains "/devices/" and page.url contains "/build" %}

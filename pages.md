@@ -2,12 +2,13 @@
 title: All Content
 sidebar: home_sidebar
 permalink: pages.html
+toc: false
 tags:
  - noindex
 ---
 
-{% assign sorted_pages = (site.pages | sort: 'title') %}
-{% assign ignore_tags = "noindex|how-to" | split: "|" %}
+{% assign sorted_pages = site.pages | sort: 'title' %}
+{% assign ignore_tags = "noindex|how-to|sdk" | split: "|" %}
 
 {% for page in sorted_pages %}
 {% assign ignore = false %}

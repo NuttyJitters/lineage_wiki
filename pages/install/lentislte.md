@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on lentislte
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: lentislte_install.html
+title: Install LineageOS on lentislte
+folder: install
 permalink: /devices/lentislte/install
 device: lentislte
 ---

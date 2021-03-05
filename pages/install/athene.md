@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on athene
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: athene_install.html
+title: Install LineageOS on athene
+folder: install
 permalink: /devices/athene/install
 device: athene
 ---

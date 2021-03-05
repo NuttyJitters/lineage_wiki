@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on shieldtablet
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: shieldtablet_install.html
+title: Install LineageOS on shieldtablet
+folder: install
 permalink: /devices/shieldtablet/install
 device: shieldtablet
 ---

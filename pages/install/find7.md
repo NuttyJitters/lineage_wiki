@@ -1,9 +1,9 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on find7
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: find7_install.html
+title: Install LineageOS on find7
+folder: install
+redirect_from:
+  - /devices/find7s/install
 permalink: /devices/find7/install
 device: find7
 ---

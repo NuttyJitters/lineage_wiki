@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on tomato
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: tomato_install.html
+title: Install LineageOS on tomato
+folder: install
 permalink: /devices/tomato/install
 device: tomato
 ---

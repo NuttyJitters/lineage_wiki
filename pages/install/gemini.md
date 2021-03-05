@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on gemini
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: gemini_install.html
+title: Install LineageOS on gemini
+folder: install
 permalink: /devices/gemini/install
 device: gemini
 ---

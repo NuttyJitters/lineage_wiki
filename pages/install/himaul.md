@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on himaul
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: himaul_install.html
+title: Install LineageOS on himaul
+folder: install
 permalink: /devices/himaul/install
 device: himaul
 ---

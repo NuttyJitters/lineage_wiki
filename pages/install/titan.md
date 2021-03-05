@@ -1,9 +1,7 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on titan
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: titan_install.html
+title: Install LineageOS on titan
+folder: install
 permalink: /devices/titan/install
 device: titan
 ---
