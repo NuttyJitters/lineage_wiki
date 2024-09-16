@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about oneplus3
+title: Info about oneplus3 variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: oneplus3_info.html
 permalink: /devices/oneplus3/
+redirect_from:
+- /devices/oneplus3/install
+- /devices/oneplus3/update
 device: oneplus3
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

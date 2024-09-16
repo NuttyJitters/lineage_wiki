@@ -1,73 +1,51 @@
 ---
 layout: default
 ---
+<div class="container page">
 
-<div class="post-header">
-   <h1 class="post-title-main">{{ page.title }}</h1>
-</div>
+  {%- if page.device != None %}
+    {%- assign device = site.data.devices[page.device] %}
+    {%- capture link %}{{ device | device_link | relative_url }}{% endcapture %}
+  {%- elsif page.tags contains "how-to" %}
+    {%- capture link %}{{ "how-to/" | relative_url }}{% endcapture %}
+  {%- endif %}
 
-{% if page.simple_map == true %}
+  {%- assign parts = "/build /update /upgrade /install /fw_update" | split: " " %}
+  {%- for part in parts %}
+    {%- if page.url contains part %}
+      {%- assign action = part | remove: "/" %}
+      {%- unless part == "/build" or part == "/update" %}
+        {%- assign notoc = true %}
+      {%- endunless %}
+      {%- break %}
+    {%- endif %}
+  {%- endfor %}
 
-<script>
-    $(document).ready ( function(){
-        $('.box{{page.box_number}}').addClass('active');
-    });
-</script>
+  {%- if link != None %}
+  <a href={{ link }} class="back-link"><span class="material-icons">keyboard_arrow_left</span> Back to the overview</a>
+  {%- endif %}
 
-{% include custom/{{page.map_name}}.html %}
+  {%- if page.title contains "variant" %}
+    <h1 class="post-title-main">Select your {{ page.device }} variant</h1>
+  {%- elsif action %}
+    {%- if action == "build" %}
+      {%- assign firstLine = action | capitalize | append: " LineageOS for" %}
+    {%- elsif action == "fw_update" %}
+      {%- assign firstLine = "Update firmware on" %}
+    {%- else %}
+      {%- assign firstLine = action | capitalize | append: " LineageOS on" %}
+    {%- endif %}
+    <h1 class="post-title-main">{{ firstLine }}<br/>
+    {{ device.vendor }} {{ device.name }}</h1>
+    <span class="codename">{{ device.codename }}</span>
+  {%- else %}
+    <h1 class="post-title-main">{{ page.title }}</h1>
+  {%- endif %}
 
-{% elsif page.complex_map == true %}
+  {% unless page.toc == false or notoc == true -%}
+  {% include toc.html -%}
+  {%- endunless -%}
 
-<script>
-    $(document).ready ( function(){
-        $('.modalButton{{page.box_number}}').addClass('active');
-    });
-</script>
-
-{% include custom/{{page.map_name}}.html %}
-
-{% endif %}
-
-<div class="post-content">
-
-   {% if page.summary %}
-    <div class="summary">{{page.summary}}</div>
-   {% endif %}
-
-    {% unless page.toc == false %}
-    {% include toc.html %}
-    {% endunless %}
-
-
-    {% if site.github_editme_path %}
-
-    <a target="_blank" href="https://github.com/{{site.github_editme_path}}{% unless page.url contains "index.html" %}pages/{% endunless %}{{page.folder}}{{page.url | remove: ".html" | append: ".md"}}" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
-
-    {% endif %}
-
-  {{content}}
-
-    <div class="tags">
-        {% if page.tags != null %}
-        {% assign projectTags = site.data.tags.allowed-tags %}
-        {% for tag in page.tags %}
-        {% if projectTags contains tag %}
-        {% unless hasTags %}
-        {% assign hasTags = true %}
-        <b>Tags: </b>
-        {% endunless %}
-        <a href="{{ "tag_" | append: tag | append: ".html" }}" class="btn btn-default navbar-btn cursorNorm" role="button">{{page.tagName}}{{tag}}</a>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-    </div>
-
-    {% if site.disqus %}
-{% include disqus.html %}
-    {% endif %}
+  {{ content }}
 
 </div>
-
-{{site.data.alerts.hr_shaded}}
-
-{% include footer.html %}

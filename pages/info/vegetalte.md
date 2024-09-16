@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about vegetalte
+title: Info about vegetalte variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: vegetalte_info.html
 permalink: /devices/vegetalte/
+redirect_from:
+- /devices/vegetalte/install
+- /devices/vegetalte/update
 device: vegetalte
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

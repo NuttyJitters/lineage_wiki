@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about clark
+title: Info about clark variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: clark_info.html
 permalink: /devices/clark/
+redirect_from:
+- /devices/clark/install
+- /devices/clark/update
 device: clark
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

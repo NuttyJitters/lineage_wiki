@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about cherry
+title: Info about cherry variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: cherry_info.html
 permalink: /devices/cherry/
+redirect_from:
+- /devices/cherry/install
+- /devices/cherry/update
 device: cherry
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

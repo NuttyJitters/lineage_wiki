@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about espressowifi
+title: Info about espressowifi variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: espressowifi_info.html
 permalink: /devices/espressowifi/
+redirect_from:
+- /devices/espressowifi/install
+- /devices/espressowifi/update
 device: espressowifi
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

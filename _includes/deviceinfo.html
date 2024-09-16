@@ -1,59 +1,57 @@
 {% assign device = site.data.devices[page.device] %}
-<style>
-td {
-    text-align: right;
-}
+<table class="deviceinfo table">
+  <tbody>
 
-ul, ol {
-    text-align: left;
-}
+    <tr class="image">
+      <td colspan="2" style="border-top: 0px;">
+      <img src="{{ "images/devices/" | append: device.image | relative_url }}" />
+      <br/><br/>
+      <b>{{ device.vendor }} {{ device.name }} ({{ device.codename }})</b>
+      </td>
+    </tr>
 
-.header {
-    font-weight: bold;
-    text-align: left;
-}
+    <tr>
+      <th scope="row">Released</th>
+      <td>
+        {%- if device.release.first -%}
+          {%- for model in device.release -%}
+            {%- assign release = model.first[1] | split: '-' -%}
+            {{ model.first[0] }}: {% include snippets/release.html -%}
+            {%- unless forloop.last -%}
+            <br/>
+            {% endunless %}
+          {%- endfor %}
+        {%- else %}
+          {% assign release = device.release | split: '-' -%}
+          {% include snippets/release.html %}
+        {%- endif %}
+      </td>
+    </tr>
 
-.header[colspan='2'] {
-    text-align: center;
-}
-</style>
-<table>
-    <colgroup>
-        <col style="width: 30%">
-        <col style="width: 70%">
-    </colgroup>
     <tr>
-        <td colspan="2" class="header"><strong>{{ device.vendor }} {{ device.name }} ({{ device.codename }})</strong></td>
+    {%- if device.carrier %}
+    <tr>
+      <th scope="col">Carrier</th>
+      <td>{{ device.carrier }}</td>
+    </tr>
+    {%- endif %}
+    </tr>
+
+    <tr>
+        <th scope="row" colspan="2">Specifications</th>
     </tr>
     <tr>
-        <td colspan="2"><img style="width:100%" src="{{ "images/devices/" | append: device.image | relative_url }}" /></td>
+        <th scope="row">SoC</th>
+        <td>{{ device.soc | join: ' / ' }}</td>
     </tr>
     <tr>
-        <td class="header">Released</td>
-        <td>{{ device.release }}</td>
-    </tr>
-    {% if device.carrier %}
-    <tr>
-        <td class="header">Carrier</td>
-        <td>{{ device.carrier }}</td>
-    </tr>
-    {% endif %}
-    <!-- specs -->
-    <tr>
-        <td class="header" colspan="2">Specifications</td>
-    </tr>
-    <tr>
-        <td class="header">SoC</td>
-        <td>{{ device.soc }}</td>
-    </tr>
-    <tr>
-        <td class="header">RAM</td>
+        <th scope="row">RAM</th>
         <td>{{ device.ram }}</td>
     </tr>
     <tr>
-        <td class="header">CPU</td>
+        <th scope="row">CPU</th>
         <td>
-            {% case device.cpu_cores %}
+            {%- case device.cpu_cores %}
                 {% when '1' %}
                     Single-core
                 {% when '2' %}
@@ -66,144 +64,242 @@ ul, ol {
                     Octa-core
                 {% else %}
                     {{ device.cpu_cores }}x
-            {% endcase %} {{ device.cpu }}<br>{{ device.cpu_freq }}
+            {%- endcase %} {{ device.cpu }}<br>{{ device.cpu_freq }}
         </td>
     </tr>
-    {% if device.architecture %}
     <tr>
-        <td class="header">Architecture</td>
-        <td>{{ device.architecture }}</td>
+        <th scope="row">Architecture</th>
+        <td>
+            {%- if device.architecture.cpu -%}
+            CPU: {{ device.architecture.cpu }}<br/>
+            Android: {{ device.architecture.userspace }}
+            {%- else -%}
+            {{ device.architecture }}
+            {%- endif -%}
+        </td>
     </tr>
-    {% endif %}
+    {%- if device.gpu != "None" %}
     <tr>
-        <td class="header">GPU</td>
-        <td>{{ device.gpu }}</td>
+        <th scope="row">GPU</th>
+        <td>{{ device.gpu | join: ' / ' }}</td>
     </tr>
-    {% if device.network %}
-    {% if device.network[0].bands != '' or device.network[1].bands != '' or device.network[2].bands != '' %}
+    {%- endif %}
+    {%- if device.network != 'None' %}
     <tr>
-        <td class="header">Network</td>
+        <th scope="row">Network</th>
         <td>
             <ul>
-                {% for el in device.network %}
-                    {% if el.bands != '' %}
-                        <li>{{ el.tech }} bands: {{ el.bands }}</li>
-                    {% else %}
-                        {% continue %}
-                    {% endif %}
-                {% endfor %}
+                {%- for el in device.network %}
+                    <li>{{ el }}</li>
+                {%- endfor %}
             </ul>
         </td>
     </tr>
-    {% endif %}
-    {% endif %}
+    {%- endif %}
     <tr>
-        <td class="header">Storage</td>
+        <th scope="row">Storage</th>
         <td>{{ device.storage }}</td>
     </tr>
-    {% if device.sdcard %}
+    {%- if device.sdcard %}
     <tr>
-        <td class="header">SD card</td>
-        <td>{{ device.sdcard }}</td>
+        <th scope="row">SD card</th>
+        <td>Up to {{ device.sdcard.size_max }}
+        {%- if device.sdcard.slot %}
+        <br/>
+        {%- case device.sdcard.slot %}
+          {%- when 'sim' %}
+            SIM slot
+          {%- when 'hybrid' %}
+            hybrid SIM slot
+          {%- when 'dedicated' %}
+            dedicated slot
+        {%- endcase %}
+        {%- endif %}
+        </td>
     </tr>
-    {% endif %}
+    {%- endif %}
+    {%- if device.screen != 'None' %}
     <tr>
-        <td class="header">Screen</td>
-        <td>{{ device.screen_res }} ({{ device.screen_ppi }} PPI)<br>{{ device.screen_tech }}</td>
+        <th scope="row">Screen</th>
+        <td>
+            {%- if device.screen.first.size == 1 %}
+              {%- comment %}The size of "first" will be 1 when there is a list of models{% endcomment -%}
+              {%- for model in device.screen %}
+                {%- assign modelname = model.first[0] %}
+                {%- assign screen_data = model.first[1] %}
+                {%- include snippets/screen.html %}
+                {%- unless forloop.last -%}
+                <br/><br/>
+                {%- endunless -%}
+              {% endfor -%}
+            {%- else %}
+                {%- assign screen_data = device.screen %}
+                {%- include snippets/screen.html %}
+            {%- endif %}
+        </td>
     </tr>
-    {% if device.bluetooth %}
+    {%- endif %}
+    {%- if device.bluetooth %}
     <tr>
-        <td class="header">Bluetooth</td>
-        <td>{{ device.bluetooth }}</td>
+        <th scope="row">Bluetooth</th>
+        <td>
+            {% if device.bluetooth.profiles -%}
+                {{ device.bluetooth.spec }} with {{ device.bluetooth.profiles | join: ', ' }}
+            {% else -%}
+                {{ device.bluetooth.spec }}
+            {% endif -%}
+        </td>
     </tr>
-    {% endif %}
-    {% if device.wifi %}
+    {%- endif %}
+    {%- if device.wifi %}
     <tr>
-        <td class="header">Wi-Fi</td>
+        <th scope="row">Wi-Fi</th>
         <td>{{ device.wifi }}</td>
     </tr>
-    {% endif %}
-    {% if device.peripherals[0] != '' %}
+    {%- endif %}
+    {%- if device.peripherals != 'None' %}
     <tr>
-        <td class="header">Peripherals</td>
+        <th scope="row">Peripherals</th>
         <td>
-            <ul>
-                {% for el in device.peripherals %}
-                <li>{{ el }}</li>
-                {% endfor %}
-            </ul>
+            {%- if device.peripherals.first.size == 1 %}
+                {%- for model in device.peripherals %}
+                <ul>
+                    <li>{{ model.first[0] }}
+                        {% assign peripherals = model.first[1] %}
+                        {% include snippets/peripherals.html %}
+                    </li>
+                </ul>
+                {%- endfor %}
+            {%- else %}
+                {%- assign peripherals = device.peripherals %}
+                {%- include snippets/peripherals.html %}
+            {%- endif %}
         </td>
     </tr>
-    {% endif %}
+    {%- endif %}
+    {%- if device.cameras and device.cameras.size > 0 %}
     <tr>
-        <td class="header">Cameras</td>
+        <th scope="row">Cameras</th>
         <td>{{ device.cameras | size }}
             <ul>
-                {% for el in device.cameras %}
+                {%- for el in device.cameras %}
                     <li>
                         {{ el.info }},
-                        {% if el.flash != '' %}
+                        {%- if el.flash != 'None' %}
                             {{ el.flash }}
-                        {% else %}
+                        {%- else %}
                             No
-                        {% endif %} flash
+                        {%- endif %} flash
                     </li>
-                {% endfor %}
+                {%- endfor %}
             </ul>
         </td>
     </tr>
-    {% if device.height and device.width and device.depth %}
+    {%- endif %}
+    {%- if device.dimensions != 'None' %}
     <tr>
-        <td class="header">Dimensions</td>
-        <td>{{ device.height }} (h)<br>{{ device.width }} (w)<br>{{ device.depth }} (d)</td>
+        <th scope="row">Dimensions</th>
+        <td>{%- if device.dimensions.first.size == 1 %}
+              {%- comment %}The size of "first" will be 1 when there is a list of models{% endcomment -%}
+              {%- for model in device.dimensions %}
+                {%- assign modelname = model.first[0] %}
+                {%- assign dimension_data = model.first[1] %}
+                {%- include snippets/dimensions.html %}
+                {%- unless forloop.last -%}
+                <br/><br/>
+                {%- endunless -%}
+              {% endfor -%}
+            {%- else %}
+                {%- assign dimension_data = device.dimensions %}
+                {%- include snippets/dimensions.html %}
+            {%- endif %}
+        </td>
     </tr>
     {% endif %}
-    {% if device.battery %}
+    {%- if device.battery != 'None' %}
     <tr>
-        <td class="header">Battery</td>
-        <td>{{ device.battery }}</td>
+        <th scope="row">Battery</th>
+        <td>
+            {%- if device.battery.first.size == 1 -%}
+            {%- comment %}The size of "first" will be 1 when there is a list of models{% endcomment -%}
+                {% for model in device.battery -%}
+                    {%- assign modelname = model.first[0] %}
+                    {%- assign battery_data = model.first[1] %}
+                    {% include snippets/battery.html %}
+                    {%- unless forloop.last -%}
+                    <br/><br/>
+                    {%- endunless %}
+                {% endfor -%}
+            {%- else %}
+                {%- assign battery_data = device.battery %}
+                {% include snippets/battery.html %}
+            {%- endif -%}
+        </td>
     </tr>
-    {% endif %}
+    {%- endif %}
     <!-- lineage info -->
     <tr>
-        <td class="header" colspan="2">Lineage info</td>
+        <th scope="row" colspan="2">LineageOS info</th>
     </tr>
+    {%- if device.maintainers != empty %}
     <tr>
-        <td class="header">Maintainers</td>
+        <th scope="row">Maintainer{% if device.maintainers.size > 1 %}s{% endif %}</th>
         <td>
             <ul>
-                {% for el in device.maintainers %}
-                    {% if el == '' %}
-                        {% if device.maintainers | size == 0 %}
-                            <li>None</li>
-                        {% endif %}
-                        {% continue %}
-                    {% endif %}
+                {%- for el in device.maintainers %}
                     <li>{{ el }}</li>
-                {% endfor %}
+                {%- endfor %}
             </ul>
         </td>
     </tr>
-    {% if device.models %}
     <tr>
-        <td class="header">Supported models</td>
+        <th scope="row">Current version</th>
         <td>
             <ul>
-            {% for model in device.models %}
-            <li> {{ model }}
-            {% endfor %}
+                <li>{% assign version = device.current_branch %}{% include snippets/branch.html %}</li>
             </ul>
         </td>
     </tr>
-    {% endif %}
+    {%- endif %}
     <tr>
-        <td class="header">Supported versions</td>
+        <th scope="row">Kernel version</th>
         <td>
             <ul>
-                {% for el in device.versions %}
-                    <li>{{ el }}</li>
-                {% endfor %}
+                <li>
+                    {{ device.kernel.version }}
+                    {%- if device.kernel.repo %}
+                    (<a href="https://github.com/LineageOS/{{ device.kernel.repo }}">source code</a>)
+                    {%- endif %}
+                </li>
             </ul>
         </td>
     </tr>
+    {%- if device.models %}
+    <tr>
+        <th scope="row"><a name="supported-models">Supported models</a></th>
+        <td>
+            <ul>
+            {%- for model in device.models %}
+                <li>{{ model }}</li>
+            {%- endfor %}
+              <li><a href='{{ "faq.html#the-list-of-supported-models-for-my-device-doesnt-contain-a-specific-one-i-need-can-i-still-use-it" | relative_url }}'><span class="material-icons">help_outline</span> Don't see yours?</a></li>
+            </ul>
+        </td>
+    </tr>
+    {%- endif %}
+    {%- if device.versions.size > 1 or device.maintainers == empty %}
+    <tr>
+        <th scope="row">Previously supported versions</th>
+        <td>
+            <ul>
+                {%- for el in device.versions %}
+                {%- unless el == device.current_branch and device.maintainers != empty %}
+                    <li>{% assign version = el %}{% include snippets/branch.html %}</li>
+                {%- endunless %}
+                {%- endfor %}
+            </ul>
+        </td>
+    </tr>
+    {%- endif %}
+  </tbody>
 </table>

@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about zl1
+title: Info about zl1 variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: zl1_info.html
 permalink: /devices/zl1/
+redirect_from:
+- /devices/zl1/install
+- /devices/zl1/update
 device: zl1
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

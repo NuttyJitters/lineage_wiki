@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about find7
+title: Info about find7 variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: find7_info.html
 permalink: /devices/find7/
+redirect_from:
+- /devices/find7/install
+- /devices/find7/update
 device: find7
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

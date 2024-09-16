@@ -1,11 +1,12 @@
 ---
 sidebar: home_sidebar
-title: Info about tomato
+title: Info about tomato variants
 folder: info
-layout: deviceinfo
-# name of the page (/{{permalink}}.html)
-redirect_from: tomato_info.html
 permalink: /devices/tomato/
+redirect_from:
+- /devices/tomato/install
+- /devices/tomato/update
 device: tomato
+toc: false
 ---
-{% include templates/device_info.md %}
+{% include templates/device_variants.md info=true %}

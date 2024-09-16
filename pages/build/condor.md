@@ -1,10 +1,8 @@
 ---
 sidebar: home_sidebar
 title: Build for condor
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: condor_build.html
-permalink: /devices/condor/build
+folder: build
+permalink: /devices/condor/build/
 device: condor
 ---
 {% include templates/device_build.md %}

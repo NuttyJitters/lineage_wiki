@@ -1,34 +1,51 @@
+{%- assign device = site.data.devices[page.device] -%}
+
 ## Unlocking the bootloader
 
-{% include note.html content="The steps below only need to be run once per device." %}
-{% include warning.html content="Unlocking the bootloader will erase all data on your device!
-Before proceeding, ensure the data you would like to retain is backed up to your PC and/or your Google account, or equivalent." %}
+{% include alerts/note.html content="The steps below only need to be run once per device." %}
+{% include alerts/warning.html content="Unlocking the bootloader will erase all data on your device!
+Before proceeding, ensure the data you would like to retain is backed up to your PC and/or your Google account, or equivalent. Please note that OEM backup solutions like Samsung and Motorola backup may not be accessible from LineageOS once installed." %}
 
-1. Make sure your computer has working [fastboot and adb]({{ "adb_fastboot_guide.html" | relative_url }}).
-2. Enable [USB debugging]({{ "adb_fastboot_guide.html#setting-up-adb" | relative_url }}) on your device.
-{% unless site.data.devices[page.device].no_oem_unlock_switch %}
-3. Enable OEM unlock in the Developer options settings on the device, if present.
+{% unless device.no_oem_unlock_switch %}
+1. Enable OEM unlock in the Developer options under device Settings, if present.
 {% endunless %}
-4. Connect the device to your PC via USB.
-5. Open a terminal on the PC and boot the device to fastboot mode by typing:
-
-        adb reboot bootloader
-
-    {% if site.data.devices[page.device].download_boot %}
+2. Connect the device to your PC via USB.
+{%- if device.has_no_usb %}
+3. Boot into fastboot mode via a key combination:
+    * {{ device.download_boot }}
+{%- else %}
+3. On the computer, open a command prompt (on Windows) or terminal (on Linux or macOS) window, and type:
+```
+adb -d reboot bootloader
+```
+    {% if device.download_boot %}
     You can also boot into fastboot mode via a key combination:
-    
-    * {{ site.data.devices[page.device].download_boot }}
+
+    * {{ device.download_boot }}
     {% endif %}
-6. Once the device is in fastboot mode, verify your PC finds it by typing:
+{%- endif %}
+4. Once the device is in fastboot mode, verify your PC finds it by typing:
+```
+fastboot devices
+```
+  If you don't get any output or an error:
+   * on Windows: make sure the device appears in the device manager without a triangle. Try other drivers until the command above works!
+   * on Linux or macOS: If you see `no permissions fastboot` try running `fastboot` as root. When the output is empty, check your USB cable and port!
+5. Now type the following command to unlock the bootloader:
 
-        fastboot devices
+{% if device.custom_unlock_cmd %}
+    ```
+{{ device.custom_unlock_cmd }}
+    ```
+{% else %}
+    ```
+fastboot oem unlock
+    ```
+{% endif %}
+    {% include alerts/note.html content="At this point the device may display on-screen prompts which will require interaction to continue the process of unlocking the bootloader. Please take whatever actions the device asks you to to proceed." %}
+6. If the device doesn't automatically reboot, reboot it. It should now be unlocked.
+7. Since the device resets completely, you will need to re-enable USB debugging to continue.
 
-   If you see `no permissions fastboot` or `<waiting for device>`, try running `fastboot` as root/Administrator.
-7. From the same terminal, type the following command to unlock the bootloader:
-
-        fastboot oem unlock
-
-8. If the device doesn't automatically reboot, reboot it. It should now be unlocked.
-9. Since the device resets completely, you will need to re-enable USB debugging to continue.
+{% include snippets/before_recovery_install.md %}
 
 {% include templates/recovery_install_fastboot_generic.md %}

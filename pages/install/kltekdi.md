@@ -1,10 +1,8 @@
 ---
 sidebar: home_sidebar
-title: Install Lineage on kltekdi
-folder: info
-# name of the page (/{{permalink}}.html)
-redirect_from: kltekdi_install.html
-permalink: /devices/kltekdi/install
+title: Install LineageOS on kltekdi
+folder: install
+permalink: /devices/kltekdi/install/
 device: kltekdi
 ---
 {% include templates/device_install.md %}

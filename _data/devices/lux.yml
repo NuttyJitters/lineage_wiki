@@ -1,47 +1,38 @@
 architecture: arm
-battery: 3630 mAh
-bluetooth: 4.0 LE
+battery: {capacity: 3630, removable: False, tech: 'Li-Ion'}
+before_install: {instructions: 'needs_specific_android_fw', lineage_version: 14.1, version: '7.1.1'}
+bluetooth: {spec: 4.0 + LE}
 cameras:
-- {flash: dual LED, info: 21MP}
-- {flash: '', info: 5MP}
-carrier:
-channels: [weekly]
+  - {flash: 'Dual LED', info: '21 MP'}
+  - {flash: None, info: '5 MP'}
 codename: lux
-cpu: Cortex A53
+cpu: Cortex-A53
 cpu_cores: '8'
 cpu_freq: 1.7 GHz
-current_branch: 14.1
-depth:
-download_boot: With the device powered off, hold Volume Down & Power simultaneously.
-gpu: Adreno 405
-has_recovery_partition: true
-height:
+current_branch: 17.1
+dimensions: {depth: 10.9, height: 148, width: 75}
+download_boot: With the device powered off, hold <kbd>Volume Down</kbd> + <kbd>Power</kbd>.
+gpu: Qualcomm Adreno 405
 image: lux.png
 install_method: fastboot_motorola
-kernel: android_kernel_motorola_msm8916
-maintainers: ['']
-name: Moto X Play
-network:
-- {tech: 2G, bands: '' }
-- {tech: 3G, bands: '' }
-- {tech: 4G, bands: '' }
-peripherals: ['']
-ram: 2GB
-recovery_boot: With the device powered off, hold Volume Down & Power simultaneously.
-  On the next screen use Volume Down to scroll to recovery and then use Volume Up
-  to select.
-release: 2015 August
-screen: 140 mm (5.5 in)
-screen_ppi: ~403
-screen_res: 1080 x 1920
-screen_tech: IPS LCD
-sdcard: up to 128GB
+kernel: {repo: android_kernel_motorola_msm8916, version: '3.10'}
+maintainers: []
+models: [XT1562, XT1563]
+name: moto x play
+network: [2G GSM, 3G UMTS, 4G LTE]
+peripherals: None
+ram: 2 GB
+recovery_boot: With the device powered off, hold <kbd>Volume Down</kbd> + <kbd>Power</kbd>. On the next screen use <kbd>Volume Down</kbd> to scroll to recovery and then press <kbd>Volume Up</kbd> to select.
+recovery_partition_name: recovery
+recovery_reboot: fastboot_menu
+release: 2015-08
+screen: {resolution: '1080x1920', size: 5.5, technology: 'IPS LCD'}
+sdcard: {size_max: '128 GB'}
 soc: Qualcomm MSM8939 Snapdragon 615
-storage: 16/32GB
+storage: 16/32 GB
 tree: android_device_motorola_lux
 type: phone
 vendor: Motorola
 vendor_short: motorola
-versions: [14.1]
-width:
-wifi: 802.11a/g/b/n (dual band capable)
+versions: [14.1, 17.1]
+wifi: 802.11 a/b/g/n

@@ -1,43 +1,36 @@
 architecture: arm
-battery:
-bluetooth: Bluetooth 4.0 + A2DP
+battery: {capacity: 1750, removable: True, tech: 'Li-Po'}
+bluetooth: {profiles: [A2DP], spec: '4.0'}
 cameras:
-- {flash: '', info: 5 MP}
-- {flash: '', info: VGA}
-carrier:
-channels: [weekly]
+  - {flash: None, info: '5 MP'}
+  - {flash: None, info: '0.3 MP'}
 codename: nicki
 cpu: Krait
 cpu_cores: '2'
 cpu_freq: 1 GHz
 current_branch: 14.1
-download_boot: With the device powered down, hold Volume Down and connect the USB
-  cable. The notification light should briefly turn green to indicate you are in flash
-  mode.
-gpu: Adreno 305
-has_recovery_partition: true
+dimensions: None
+download_boot: With the device powered off, hold <kbd>Volume Up</kbd> and connect the USB cable. The notification light should turn blue.
+gpu: Qualcomm Adreno 305
 image: nicki.png
 install_method: fastboot_sony
-kernel: android_kernel_sony_msm8x27
-maintainers: [freexperia, Ron Gokhale]
+install_variant: sony_init_fota
+kernel: {repo: android_kernel_sony_msm8x27, version: '3.4'}
+maintainers: []
 name: Xperia M
-network:
-- {tech: 2G, bands: '850 900 1800 1900 MHz GSM' }
-- {tech: 3G, bands: '900 2100 MHz HSDPA (C1905 and C2005), 850 1700 1900 2100 MHz HSDPA (C1904 and C2004)' }
-- {tech: 4G, bands: '' }
-peripherals: [Accelerometer, proximity, compass]
-ram: 1GB
-recovery_boot: Press Volume Up when the notification light is pink.
-release: 2013 June
-screen: 102 mm (4.0 in)
-screen_ppi: '244.9'
-screen_res: 480x854
-screen_tech: TFT
-sdcard: up to 32GB
-soc: Qualcomm MSM8960 Snapdragon S4 Plus
-storage: 4GB
+network: [2G GSM, 3G UMTS]
+peripherals: [Accelerometer, Proximity sensor, Compass]
+ram: 1 GB
+recovery_boot: With the device powered off, boot the device and press <kbd>Volume Up</kbd> when the notification light is pink.
+recovery_partition_name: boot
+release: 2013-06
+screen: {resolution: '480x854', size: 4, technology: 'TFT LCD'}
+sdcard: {size_max: '32 GB'}
+soc: Qualcomm MSM8227 Snapdragon S4 Plus
+storage: 4 GB
 tree: android_device_sony_nicki
 type: phone
+uses_twrp: true
 vendor: Sony
 vendor_short: sony
 versions: [14.1]
